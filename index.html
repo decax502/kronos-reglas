@@ -13,6 +13,9 @@
             --secondary-accent: #45a29e;
             --text-main: #c5c6c7;
             --text-light: #ffffff;
+            --ticket-color: #ff6b35;
+            --ticket-hover: #ff8c61;
+            --staff-bg: #151b22;
         }
 
         * {
@@ -33,20 +36,32 @@
             overflow-x: hidden;
         }
 
-        /* Animación de entrada */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        /* Animaciones */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px rgba(255, 107, 53, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(255, 107, 53, 0.8); }
+            100% { box-shadow: 0 0 10px rgba(255, 107, 53, 0.4); }
         }
 
         header {
             text-align: center;
-            margin-bottom: 3rem;
-            animation: fadeIn 1s ease-out;
+            margin-bottom: 4rem;
+            animation: fadeInDown 1s ease-out;
+            width: 100%;
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: clamp(3rem, 8vw, 5rem);
             font-weight: 800;
             color: var(--text-light);
             letter-spacing: 5px;
@@ -56,12 +71,33 @@
         }
 
         header p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             color: var(--secondary-accent);
             letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        .rules-container {
+        main {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Esto asegura que todo el contenido principal esté centrado */
+        }
+
+        .section-title {
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+            color: var(--text-light);
+            margin: 3rem 0 2rem;
+            animation: fadeInUp 1s ease-out forwards;
+            border-bottom: 2px solid var(--secondary-accent);
+            padding-bottom: 0.5rem;
+            max-width: 1200px;
+        }
+
+        /* Contenedor de Reglas */
+        .rules-container, .staff-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
@@ -74,42 +110,126 @@
             padding: 2rem;
             border-radius: 15px;
             border-left: 5px solid var(--primary-accent);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
-            animation: fadeIn 1s ease-out forwards;
+            animation: fadeInUp 0.8s ease-out forwards;
             opacity: 0;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Retraso escalonado para la animación de las tarjetas */
+        /* Retraso para efecto cascada en reglas */
         .rule-card:nth-child(1) { animation-delay: 0.2s; }
         .rule-card:nth-child(2) { animation-delay: 0.4s; }
         .rule-card:nth-child(3) { animation-delay: 0.6s; }
         .rule-card:nth-child(4) { animation-delay: 0.8s; }
         .rule-card:nth-child(5) { animation-delay: 1.0s; }
+        .rule-card:nth-child(6) { animation-delay: 1.2s; }
 
         .rule-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(102, 252, 241, 0.2);
+            box-shadow: 0 10px 20px rgba(102, 252, 241, 0.15);
             border-left-color: var(--text-light);
+            background-color: #242f3c;
         }
 
         .rule-number {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 800;
             color: var(--primary-accent);
-            margin-bottom: 1rem;
-            display: inline-block;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
         }
 
         .rule-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--text-light);
             margin-bottom: 1rem;
         }
 
         .rule-text {
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.6;
+            color: #a0a2a5;
+        }
+
+        /* Sección Staff */
+        .staff-card {
+            background-color: var(--staff-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(102, 252, 241, 0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .staff-card:nth-child(1) { animation-delay: 1.4s; }
+        .staff-card:nth-child(2) { animation-delay: 1.6s; }
+        .staff-card:nth-child(3) { animation-delay: 1.8s; }
+
+        .staff-card:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-accent);
+        }
+
+        .staff-name {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .staff-role {
+            font-size: 1rem;
+            color: var(--secondary-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Sección Ticket */
+        .ticket-section {
+            margin: 5rem auto 0 auto; /* Se agregó "auto" para centrar correctamente en pantallas grandes */
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            background-color: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out 2s forwards;
+            opacity: 0;
+        }
+
+        .ticket-desc {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .ticket-btn {
+            display: block;
+            width: 100%;
+            background-color: var(--ticket-color);
+            color: #fff;
+            text-decoration: none;
+            padding: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            animation: pulseGlow 2s infinite;
+        }
+
+        .ticket-btn:hover {
+            background-color: var(--ticket-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.6);
         }
 
         footer {
@@ -117,13 +237,23 @@
             text-align: center;
             font-size: 0.9rem;
             color: var(--secondary-accent);
-            animation: fadeIn 1s ease-out 1.2s forwards;
+            animation: fadeInUp 1s ease-out 2.2s forwards;
             opacity: 0;
+            padding-bottom: 2rem;
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .rules-container { grid-template-columns: 1fr; }
+            .ticket-section {
+                padding: 2rem 1rem;
+                margin-top: 3rem;
+            }
+            .ticket-btn {
+                font-size: 1.2rem;
+                padding: 1.2rem;
+            }
+            .rule-card {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -131,46 +261,78 @@
 
     <header>
         <h1>KRONOS</h1>
-        <p>NORMATIVAS OFICIALES DEL SERVIDOR</p>
+        <p>Normativas Oficiales del Servidor</p>
     </header>
 
-    <main class="rules-container">
-        
-        <div class="rule-card">
-            <span class="rule-number">01</span>
-            <h2 class="rule-title">Respeto Mutuo</h2>
-            <p class="rule-text">Cero tolerancia a la toxicidad. Las bromas están permitidas, pero el acoso, los insultos personales, el racismo o cualquier tipo de discriminación resultarán en una sanción inmediata.</p>
+    <main>
+        <!-- SECCIÓN DE REGLAS -->
+        <div class="rules-container">
+            <div class="rule-card">
+                <span class="rule-number">01</span>
+                <h2 class="rule-title">Aguante y Límites</h2>
+                <p class="rule-text">Somos un servidor relajado. Las bromas pesadas, el bardo y el humor negro están permitidos. <strong>PERO</strong>, si alguien te pide que pares, te detienes. Cero tolerancia al acoso real, doxeo o discriminación seria.</p>
+            </div>
+
+            <div class="rule-card">
+                <span class="rule-number">02</span>
+                <h2 class="rule-title">Spam y Flood Controlado</h2>
+                <p class="rule-text">Puedes mandar memes y joder en el chat, pero no satures enviando 50 mensajes por segundo. Prohibido mandar links de otros servidores (auto-promoción) sin permiso del staff.</p>
+            </div>
+
+            <div class="rule-card">
+                <span class="rule-number">03</span>
+                <h2 class="rule-title">Pings al Staff</h2>
+                <p class="rule-text">Etiqueta a los moderadores solo cuando haya un problema real que requiera intervención. No nos pingees para ver si estamos despiertos o por tonterías que pueden resolver entre ustedes.</p>
+            </div>
+
+            <div class="rule-card">
+                <span class="rule-number">04</span>
+                <h2 class="rule-title">Ubicación del Contenido</h2>
+                <p class="rule-text">Usa la lógica. Cada canal tiene su propósito. No pongas memes en canales de debates serios, y no satures los canales de voz con ruido molesto sin sentido.</p>
+            </div>
+
+            <div class="rule-card">
+                <span class="rule-number">05</span>
+                <h2 class="rule-title">Contenido +18 (NSFW)</h2>
+                <p class="rule-text">Absolutamente prohibido el material pornográfico, gore o ilegal en los canales públicos. Si existe un canal específico para NSFW, úsalo ahí. De lo contrario, guárdatelo.</p>
+            </div>
+
+            <div class="rule-card">
+                <span class="rule-number">06</span>
+                <h2 class="rule-title">Sentido Común (Regla de Oro)</h2>
+                <p class="rule-text">Si sabes que algo va a causar un problema grave o que rompe los términos de Discord (TOS), simplemente no lo hagas. El staff tiene la última palabra en cualquier situación no escrita aquí.</p>
+            </div>
         </div>
 
-        <div class="rule-card">
-            <span class="rule-number">02</span>
-            <h2 class="rule-title">Cero Spam y Flood</h2>
-            <p class="rule-text">Mantén el chat legible. Está prohibido enviar mensajes repetitivos, abusar de las mayúsculas, enviar enlaces de otros servidores (auto-promoción) o llenar la pantalla con muros de texto innecesarios.</p>
+        <!-- SECCIÓN DEL STAFF -->
+        <h2 class="section-title">Equipo de Moderación</h2>
+        <div class="staff-container">
+            <div class="staff-card">
+                <h3 class="staff-name">Tdecax</h3>
+                <span class="staff-role">👑 Owner</span>
+            </div>
+            <div class="staff-card">
+                <h3 class="staff-name">josdos</h3>
+                <span class="staff-role">⭐ Co Owner</span>
+            </div>
+            <div class="staff-card">
+                <h3 class="staff-name">Joax</h3>
+                <span class="staff-role">🛡️ Administrador</span>
+            </div>
         </div>
 
-        <div class="rule-card">
-            <span class="rule-number">03</span>
-            <h2 class="rule-title">Moderación con las Menciones</h2>
-            <p class="rule-text">El uso de menciones a roles globales u otros usuarios debe tener una justificación real. Etiquetar al staff o a otros miembros sin motivo interrumpe y molesta.</p>
+        <!-- SECCIÓN DE TICKET (BOTÓN NARANJA) -->
+        <div class="ticket-section">
+            <p class="ticket-desc">¿Tienes algún problema grave, duda con las reglas o alguien se pasó de la raya y no se detiene? No dudes en contactar al equipo de moderación.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeOOxg_YBvheX0HHG8x5MCw85cLnwJAfLog5H8OOEfOAPyq7g/viewform" target="_blank" class="ticket-btn">
+                📩 Abrir Ticket de Soporte
+            </a>
         </div>
-
-        <div class="rule-card">
-            <span class="rule-number">04</span>
-            <h2 class="rule-title">Uso Correcto de Canales</h2>
-            <p class="rule-text">Cada canal tiene un propósito específico en su descripción. Usa los canales de bots, memes o multimedia de manera adecuada para no desvirtuar las conversaciones principales.</p>
-        </div>
-
-        <div class="rule-card">
-            <span class="rule-number">05</span>
-            <h2 class="rule-title">Contenido Seguro</h2>
-            <p class="rule-text">Todo el contenido compartido debe ser apto (SFW). Cualquier material explícito, engañoso, inapropiado o que infrinja los Términos de Servicio de Discord significa expulsión directa.</p>
-        </div>
-
     </main>
 
     <footer>
-        <p>Al permanecer en este servidor, aceptas cumplir con estas normativas. El desconocimiento de las reglas no exime de su cumplimiento.</p>
-        <p>&copy; KRONOS - Todos los derechos reservados.</p>
+        <p>Al permanecer en KRONOS, aceptas jugar bajo estas reglas. El desconocimiento no exime de un posible baneo.</p>
+        <p>&copy; 2026 KRONOS - Todos los derechos reservados.</p>
     </footer>
 
 </body>
