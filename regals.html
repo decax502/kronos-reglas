@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reglas del Servidor | KRONOS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #1f2833;
+            --primary-accent: #66fcf1;
+            --secondary-accent: #45a29e;
+            --text-main: #c5c6c7;
+            --text-light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--text-light);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--primary-accent), 0 0 20px var(--primary-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--secondary-accent);
+            letter-spacing: 2px;
+        }
+
+        .rules-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .rule-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary-accent);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* Retraso escalonado para la animación de las tarjetas */
+        .rule-card:nth-child(1) { animation-delay: 0.2s; }
+        .rule-card:nth-child(2) { animation-delay: 0.4s; }
+        .rule-card:nth-child(3) { animation-delay: 0.6s; }
+        .rule-card:nth-child(4) { animation-delay: 0.8s; }
+        .rule-card:nth-child(5) { animation-delay: 1.0s; }
+
+        .rule-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(102, 252, 241, 0.2);
+            border-left-color: var(--text-light);
+        }
+
+        .rule-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-accent);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .rule-title {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .rule-text {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--secondary-accent);
+            animation: fadeIn 1s ease-out 1.2s forwards;
+            opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .rules-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>KRONOS</h1>
+        <p>NORMATIVAS OFICIALES DEL SERVIDOR</p>
+    </header>
+
+    <main class="rules-container">
+        
+        <div class="rule-card">
+            <span class="rule-number">01</span>
+            <h2 class="rule-title">Respeto Mutuo</h2>
+            <p class="rule-text">Cero tolerancia a la toxicidad. Las bromas están permitidas, pero el acoso, los insultos personales, el racismo o cualquier tipo de discriminación resultarán en una sanción inmediata.</p>
+        </div>
+
+        <div class="rule-card">
+            <span class="rule-number">02</span>
+            <h2 class="rule-title">Cero Spam y Flood</h2>
+            <p class="rule-text">Mantén el chat legible. Está prohibido enviar mensajes repetitivos, abusar de las mayúsculas, enviar enlaces de otros servidores (auto-promoción) o llenar la pantalla con muros de texto innecesarios.</p>
+        </div>
+
+        <div class="rule-card">
+            <span class="rule-number">03</span>
+            <h2 class="rule-title">Moderación con las Menciones</h2>
+            <p class="rule-text">El uso de menciones a roles globales u otros usuarios debe tener una justificación real. Etiquetar al staff o a otros miembros sin motivo interrumpe y molesta.</p>
+        </div>
+
+        <div class="rule-card">
+            <span class="rule-number">04</span>
+            <h2 class="rule-title">Uso Correcto de Canales</h2>
+            <p class="rule-text">Cada canal tiene un propósito específico en su descripción. Usa los canales de bots, memes o multimedia de manera adecuada para no desvirtuar las conversaciones principales.</p>
+        </div>
+
+        <div class="rule-card">
+            <span class="rule-number">05</span>
+            <h2 class="rule-title">Contenido Seguro</h2>
+            <p class="rule-text">Todo el contenido compartido debe ser apto (SFW). Cualquier material explícito, engañoso, inapropiado o que infrinja los Términos de Servicio de Discord significa expulsión directa.</p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Al permanecer en este servidor, aceptas cumplir con estas normativas. El desconocimiento de las reglas no exime de su cumplimiento.</p>
+        <p>&copy; KRONOS - Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
